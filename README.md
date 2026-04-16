@@ -15,13 +15,18 @@ AI-powered quantitative risk analysis platform combining technical indicators, r
 ---
 
 ## 📷 Screenshots
-<img width="1859" height="892" alt="image" src="https://github.com/user-attachments/assets/770213f0-f6bb-48ec-b0eb-f5a8e8a2bd25" />
-<img width="1889" height="880" alt="image" src="https://github.com/user-attachments/assets/71ca927a-fe49-4d0a-819f-b8ee7524ef9b" />
-<img width="1796" height="745" alt="image" src="https://github.com/user-attachments/assets/986d8bf6-c547-492d-88df-83f9f3113eb2" />
-<img width="1858" height="619" alt="image" src="https://github.com/user-attachments/assets/25fb9ce4-9d10-4e22-9dfc-b88835ff35d6" />
-<img width="1794" height="803" alt="image" src="https://github.com/user-attachments/assets/e07eadfa-e520-485e-84de-a1dc01a4f86f" />
-<img width="1861" height="842" alt="image" src="https://github.com/user-attachments/assets/10ab7065-249a-4b7a-a427-2dc6ef35ac9d" />
 
+<img width="1902" height="890" alt="image" src="https://github.com/user-attachments/assets/ad15d918-4f1c-4556-a7fc-81afda52dc81" />
+<img width="1911" height="892" alt="image" src="https://github.com/user-attachments/assets/bbd2a471-8c72-465d-8fb1-ff0d1e1d95c5" />
+<img width="1892" height="788" alt="image" src="https://github.com/user-attachments/assets/08d6b762-cc19-40fe-bb61-65b763c4644c" />
+<img width="1888" height="725" alt="image" src="https://github.com/user-attachments/assets/239de613-2ea4-4138-8d02-294dd1e05b9e" />
+<img width="1854" height="740" alt="image" src="https://github.com/user-attachments/assets/5c007b38-8c72-406b-8d93-ea0372d637df" />
+<img width="1906" height="886" alt="image" src="https://github.com/user-attachments/assets/7695f954-2e84-46d9-8a1b-f0522a7f0321" />
+<img width="1903" height="883" alt="image" src="https://github.com/user-attachments/assets/d4c90325-85ed-47c3-92bb-aec5d20cb458" />
+<img width="1901" height="891" alt="image" src="https://github.com/user-attachments/assets/9e0f4258-1db5-478a-9cc5-a81e47cbdf81" />
+<img width="1897" height="845" alt="image" src="https://github.com/user-attachments/assets/53aff1ef-92a2-4de3-aba8-64f3409c317f" />
+
+---
 
 ## 🛠 Tech Stack
 
