@@ -8,36 +8,37 @@ import yfinance as yf
 import re
 
 # =========================
-# 🎨 UI Styling
+# 🎨 PAGE CONFIG
 # =========================
-st.set_page_config(page_title="Quantinsight-AI", layout="wide")
+st.set_page_config(page_title="QuantInsight-AI", layout="wide")
 
+# =========================
+# 🎯 HEADER
+# =========================
 st.markdown("""
-<style>
-.big-font {
-    font-size:28px !important;
-    font-weight: bold;
-}
-</style>
+<h1 style='margin-bottom:0;'>QuantInsight-AI</h1>
+<p style='color:gray; margin-top:0;'>Real-time stock analysis dashboard</p>
 """, unsafe_allow_html=True)
 
-st.title("QuantInsight-AI")
-st.caption("Real-time stock analysis and insights")
+st.markdown("---")
 
 # =========================
-# 🔤 Input
+# 📌 SIDEBAR INPUT
 # =========================
-tickers = st.text_input("Enter Stock Tickers (comma separated, e.g., AAPL, TSLA)")
+with st.sidebar:
+    st.header("Input")
+    tickers = st.text_input("Enter Stock Tickers", "AAPL, TSLA")
+    analyze = st.button("Analyze")
 
 # =========================
-# 🚀 Main Logic
+# 🚀 MAIN LOGIC
 # =========================
-if st.button("Analyze"):
+if analyze:
 
     if tickers:
         ticker_list = [t.strip().upper() for t in tickers.split(",")]
 
-        st.subheader(f"Analyzing: {', '.join(ticker_list)}")
+        st.markdown(f"### Analyzing: {', '.join(ticker_list)}")
 
         results = []
         analysis_map = {}
@@ -49,9 +50,8 @@ if st.button("Analyze"):
 
             data = get_stock_metrics(ticker)
 
-            # skip invalid tickers
             if not data or "error" in data:
-                st.warning(f"Skipping {ticker} (invalid or no data)")
+                st.warning(f"Skipping {ticker}")
                 continue
 
             with st.spinner(f"Analyzing {ticker}..."):
@@ -70,7 +70,6 @@ if st.button("Analyze"):
                 "Risk Score": score
             })
 
-        # 🚨 If nothing valid
         if not results:
             st.error("No valid tickers found")
             st.stop()
@@ -78,15 +77,21 @@ if st.button("Analyze"):
         df = pd.DataFrame(results)
 
         # =========================
-        # 📊 DASHBOARD
+        # 📊 METRICS ROW
         # =========================
-        st.markdown("## 📊 Dashboard")
-        st.divider()
+        st.markdown("## Overview")
+
+        col1, col2, col3 = st.columns(3)
+        col1.metric("Avg Price", round(df["Price"].mean(), 2))
+        col2.metric("Avg RSI", round(df["RSI"].mean(), 2))
+        col3.metric("Avg Risk", round(df["Risk Score"].mean(), 2))
+
+        st.markdown("---")
 
         # =========================
-        # 📊 TABLE
+        # 📋 TABLE
         # =========================
-        st.markdown("### 📋 Comparison Table")
+        st.markdown("## Comparison Table")
         st.dataframe(df, use_container_width=True)
 
         # =========================
@@ -97,19 +102,22 @@ if st.button("Analyze"):
             x="Ticker",
             y="Risk Score",
             color="Risk Score",
-            title="📊 Risk Comparison Across Stocks",
-            color_continuous_scale="RdYlGn_r"
+            color_continuous_scale="RdYlGn_r",
+            title="Risk Comparison"
         )
+
+        fig.update_layout(template="plotly_dark", margin=dict(l=20, r=20, t=40, b=20))
+
         st.plotly_chart(fig, use_container_width=True)
 
-        st.divider()
+        st.markdown("---")
 
         # =========================
         # 📈 PRICE CHARTS
         # =========================
-        st.markdown("## 📈 Price Charts")
+        st.markdown("## Price Trends")
 
-        for ticker in df["Ticker"]:   # ✅ FIXED
+        for ticker in df["Ticker"]:
             stock = yf.Ticker(ticker)
             df_price = stock.history(period="3mo")
 
@@ -120,16 +128,37 @@ if st.button("Analyze"):
                 name=ticker
             ))
 
+            fig.update_layout(
+                template="plotly_dark",
+                margin=dict(l=20, r=20, t=30, b=20)
+            )
+
             st.plotly_chart(fig, use_container_width=True)
 
-        st.divider()
+        st.markdown("---")
+
+        # =========================
+        # 🧠 INSIGHTS (NEW FEATURE)
+        # =========================
+        st.markdown("## Insights")
+
+        avg_risk = df["Risk Score"].mean()
+
+        if avg_risk > 70:
+            st.error("Overall portfolio shows high risk.")
+        elif avg_risk > 40:
+            st.warning("Moderate risk across selected stocks.")
+        else:
+            st.success("Stocks appear relatively stable.")
+
+        st.markdown("---")
 
         # =========================
         # 📄 DETAILED ANALYSIS
         # =========================
-        st.markdown("## 📄 Detailed Analysis")
+        st.markdown("## Detailed Analysis")
 
-        for ticker in df["Ticker"]:   # ✅ FIXED
+        for ticker in df["Ticker"]:
             st.markdown(f"### {ticker}")
 
             result = analysis_map.get(ticker, "")
@@ -137,32 +166,25 @@ if st.button("Analyze"):
             match = re.search(r'Risk Score:\s*(\d+)', result)
             score = int(match.group(1)) if match else 50
 
-            # 🎨 Risk Styling
             if score > 70:
                 color = "red"
-                emoji = "🔴"
                 label = "High Risk"
             elif score > 40:
                 color = "orange"
-                emoji = "🟠"
                 label = "Moderate Risk"
             else:
                 color = "green"
-                emoji = "🟢"
                 label = "Low Risk"
 
-            st.markdown(
-                f"<div class='big-font'>{emoji} Risk Score: {score}%</div>",
-                unsafe_allow_html=True
-            )
+            st.metric("Risk Score", f"{score}%")
             st.markdown(f"**Status:** :{color}[{label}]")
 
             # =========================
             # 📰 NEWS
             # =========================
-            news = get_news(ticker)
+            st.markdown("#### Latest News")
 
-            st.markdown("#### 📰 Latest News")
+            news = get_news(ticker)
 
             if news:
                 for headline in news.split(".")[:3]:
@@ -171,8 +193,11 @@ if st.button("Analyze"):
             else:
                 st.markdown("- No recent news available")
 
-            st.markdown("#### 🧠 AI Reasoning")
-            st.markdown(f"```\n{result}\n```")
+            # =========================
+            # 🧠 AI OUTPUT
+            # =========================
+            st.markdown("#### AI Reasoning")
+            st.code(result)
 
     else:
         st.warning("Please enter at least one stock ticker")
