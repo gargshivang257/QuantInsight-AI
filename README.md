@@ -25,9 +25,16 @@ AI-powered quantitative risk analysis platform combining technical indicators, r
 
 ---
 
-## ▶️ Run Locally
+## 📷 Demo
+
+👉 Live App: https://quantinsight-ai.streamlit.app/
+
+---
+
+## ⚙️ How to Run Locally
 
 ```bash
+git clone https://github.com/gargshivang257/YOUR-REPO-NAME
+cd YOUR-REPO-NAME
 pip install -r requirements.txt
 streamlit run app.py
-```
