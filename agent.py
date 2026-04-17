@@ -1,8 +1,10 @@
 from tools import get_stock_metrics, get_sentiment
 from google import genai
+import os
 
 # 🔑 Create client
-client = genai.Client(api_key="AIzaSyAuACInfssyJRZVP-6iLId8VzkB-4-CtW8")
+
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
 import time
 def safe_generate(prompt):

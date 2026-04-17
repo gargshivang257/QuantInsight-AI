@@ -6,11 +6,11 @@ AI-powered quantitative risk analysis platform combining technical indicators, r
 
 ## 🔥 Features
 
-- 📊 Real-time stock data (RSI, Moving Average)
-- 🧠 AI-generated risk score & reasoning
-- 📈 Multi-stock comparison dashboard
-- 📰 News-based sentiment analysis
-- 🎨 Interactive Streamlit UI
+* 📊 Real-time stock data (RSI, Moving Average)
+* 🧠 AI-generated risk score & reasoning
+* 📈 Multi-stock comparison dashboard
+* 📰 News-based sentiment analysis
+* 🎨 Interactive Streamlit UI
 
 ---
 
@@ -25,26 +25,25 @@ AI-powered quantitative risk analysis platform combining technical indicators, r
 <img width="1904" height="905" alt="image" src="https://github.com/user-attachments/assets/bb27e69e-f7af-42c3-a05a-aa70f3e8030b" />
 <img width="1899" height="889" alt="image" src="https://github.com/user-attachments/assets/34b06b5e-27d4-46ca-9a3e-dbe03912531a" />
 
-
 ---
 
 ## 🛠 Tech Stack
 
-- Python
-- Streamlit
-- yfinance
-- Plotly
-- Gemini API
-- NewsAPI
+* Python
+* Streamlit
+* yfinance
+* Plotly
+* Gemini API
+* NewsAPI
 
 ---
 
 ## ⚙️ How It Works
 
-- Fetches stock data using yFinance  
-- Processes and analyzes data using Pandas  
-- Generates visualizations using Plotly  
-- Displays results through an interactive Streamlit interface  
+* Fetches stock data using yFinance
+* Processes and analyzes data using Pandas
+* Generates visualizations using Plotly
+* Displays results through an interactive Streamlit interface
 
 ---
 
@@ -61,3 +60,4 @@ git clone https://github.com/gargshivang257/QuantInsight-AI
 cd QuantInsight-AI
 pip install -r requirements.txt
 streamlit run app.py
+```

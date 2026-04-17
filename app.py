@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 import streamlit as st
 import plotly.graph_objs as go
 import pandas as pd
@@ -6,7 +9,6 @@ import yfinance as yf
 import re
 from datetime import datetime, timedelta
 
-# Note: Assuming these are your custom local modules
 from agent import run_quant_agent
 from tools import get_stock_metrics, get_news
 
