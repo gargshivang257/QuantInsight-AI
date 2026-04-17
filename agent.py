@@ -3,8 +3,14 @@ from google import genai
 import os
 import streamlit as st
 
+# Get API key from .env (local) or Streamlit secrets (cloud)
 api_key = os.getenv("GEMINI_API_KEY") or st.secrets.get("GEMINI_API_KEY")
 
+# 🔥 ADD THIS SAFETY CHECK
+if not api_key:
+    raise ValueError("GEMINI_API_KEY is not set")
+
+# Initialize client
 client = genai.Client(api_key=api_key)
 import time
 def safe_generate(prompt):
